@@ -1,0 +1,9 @@
+.container {
+  background-color: pink;
+  width: 600px;
+  height: 600px;
+}
+
+.completed span {
+  text-decoration: line-through;
+}
