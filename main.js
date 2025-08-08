@@ -5,7 +5,9 @@ const deleteButton = document.querySelector(".deleteButton");
 const editButton = document.querySelector(".editButton");
 
 function addNewTask() {
-  const task = input.value;
+  const task = input.value.trim();
+  if (task === "") return;
+
   const newTask = document.createElement("li");
   newTask.classList.add(
     "list-group-item",
@@ -28,11 +30,27 @@ taskList.addEventListener("click", (e) => {
   const li = e.target.closest("li");
   if (e.target.classList.contains("deleteButton")) {
     li.remove();
+    return;
   }
-  if (e.target.classList.contains("editButton")) {
-    li.remove();
+
+  const editBtn = e.target.closest(".editButton");
+  if (editBtn) {
+    const span = li.querySelector("span");
+    const isEditing = span.querySelector("input");
+
+    if (!isEditing) {
+      const currentText = span.textContent;
+      span.innerHTML = `<input type="text" class="form-control form-control-sm" value="${currentText}">`;
+      editBtn.textContent = "Save";
+    } else {
+      const inputField = span.querySelector("input");
+      span.textContent = inputField.value.trim() || "Task without name!";
+      editBtn.textContent = "Edit";
+    }
+    return;
   }
-  if (li && taskList.contains(li)) {
+
+  if (!e.target.closest("button") && !e.target.closest("input")) {
     li.classList.toggle("completed");
   }
 });

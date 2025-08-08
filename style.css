@@ -1,9 +1,12 @@
+body {
+  background-color: rgba(180, 118, 219, 0.77);
+}
 .container {
-  background-color: pink;
+  background-color: rgba(187, 83, 251, 0.69);
   width: 600px;
   height: 600px;
+  border-radius: 20px;
 }
-
 .completed span {
   text-decoration: line-through;
 }
